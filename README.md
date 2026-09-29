@@ -15,6 +15,22 @@ AIDELI(아이델리)는 사람과 AI가 함께 쓰는 개인 작업실이에요.
 2. 받은 파일을 실행해요. 서명하지 않은 앱이라 "Windows의 PC 보호" 창이 뜨면 **추가 정보 → 실행**을 눌러요.
 3. 묻지 않고 바로 깔리고, 바탕화면과 시작 메뉴에 **AIDELI**가 생겨요.
 
+### AI 에이전트(Codex·Claude 등)에게 맡길 때
+
+"https://github.com/ohey099-cell/aideli_release 에서 AIDELI 설치해줘"라고 하면 돼요. 에이전트는 PowerShell에서 아래를 그대로 돌리면 돼요. 가장 최근 판을 받아 조용히 설치하고 켜요.
+
+```powershell
+$ProgressPreference = 'SilentlyContinue'
+$r = Invoke-RestMethod https://api.github.com/repos/ohey099-cell/aideli_release/releases/latest
+$a = $r.assets | Where-Object name -like 'AIDELI-Setup-*.exe'
+$f = Join-Path $env:TEMP $a.name
+Invoke-WebRequest $a.browser_download_url -OutFile $f
+Start-Process $f -ArgumentList '/S' -Wait
+Start-Process "$env:LOCALAPPDATA\Programs\aideli\AIDELI.exe"
+```
+
+로그인은 에이전트가 대신하지 못해요. 켜진 뒤 아래 '처음 켜면'은 사람이 해요.
+
 ## 처음 켜면
 
 'AIDELI 시작하기'가 떠요.
